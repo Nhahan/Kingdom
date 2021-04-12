@@ -1,5 +1,6 @@
 package org.example.Kingdom;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -8,6 +9,8 @@ public class Main {
     static int traitor = 5; //반역자 수, 반역자 수가 충신 수보다 많아지면 패배합니다.
     static int popularity = 5; //민심, 0이 되면 패배합니다.
     static int money = 5; //재정, 0이 되면 패배합니다.
+    static int merchant = 0;
+    static int event = 0;
 
     public static void main(String[] args) {
         Main game = new Main();
@@ -85,7 +88,7 @@ public class Main {
             game.gameStart();
         }
     } // 승패 체크
-    public void gameStatus() {
+    public void gameStatus() { // 게임 리셋
         loyalist = 10;
         traitor = 5;
         popularity = 5;
@@ -216,6 +219,7 @@ public class Main {
                 popularity += 0;
                 money -= 2; //-2
                 f += 1;
+                merchant = 1; // 상인길드 이벤트 활성화
             } else if (answerMerchant == 2) {
                 loyalist -= 1; // -1
                 traitor += 1; // +1
@@ -346,7 +350,7 @@ public class Main {
         System.out.println("4. 감히 왕궁에 겁도 없이 찾아오다니. 당장 더러운 마녀를 죽여라!");
 
         int f = 0;
-        int witch = 0;
+        event = 0;
         for (f = 0; f < 1; ) {
             int answerDay1_3 = scan.nextInt();
             if (answerDay1_3 == 1) {
@@ -355,7 +359,7 @@ public class Main {
                 popularity -= -1; // -1
                 money -= 0;
                 f += 1;
-                witch = 1;
+                event = 1; // 마녀이벤트 활성화
             } else if (answerDay1_3 == 2) {
                 loyalist += 1; // +1
                 traitor += 1; // +1
@@ -370,9 +374,9 @@ public class Main {
                 f += 1;
             } else if (answerDay1_3 == 4) {
                 loyalist += 1; // +1
-                traitor = 0;
-                popularity = 0;
-                money += 0;
+                traitor += 0;
+                popularity += 0;
+                money += 1; // +1
                 f += 1;
             } else {
                 continue;
@@ -380,21 +384,20 @@ public class Main {
         } // 마녀 선택지
         int g = 0; // 마녀를 만남
         int witch_cantsayit = 0;
-        int witch_goods = 0;
-        if (witch == 1) {
+        if (event == 1) {
             System.out.println("꾀죄죄한 마녀가 온몸을 비틀며 다가온다.");
             System.out.println("마녀는 검버섯과 주름이 가득한 얼굴을 일그러뜨리며 힘겹게 입을 연다."); game.loading();
 
             System.out.println("\"왕이시여, 저는 동쪽의 마녀 그레텔이라고 합니다.");
             System.out.println("궁으로부터 심상치 기운이 느껴져 이렇게 찾아왔습니다.");
             System.out.println("저를 오늘밤 궁에서 재워주신다면 왕과 나라에 필요한 2가지를 드리겠습니다.");
-            System.out.println("단, 모든 것은 댓가가 필요하기 마련입니다."); game.loading();
+            System.out.println("단, 모든 것은 댓가가 필요하기 마련입니다.\""); game.loading();
 
             System.out.println("1. 좋다. 재워주마. 시녀들이 너를 안내할 것이다");
             System.out.println("2. 왕과 나라에 필요한 2가지와 댓가가 무엇이냐?");
             System.out.println("3. 필요없다. 목숨은 살려줄테니 썩 꺼지거라");
             System.out.println("4. 여기가 어느 안전이라고! 당장 이 마녀를 죽여라!");
-            for (g = 0; g < 1; ) {
+            for (g = 0; g < 1;) {
                 int answerDay1_31 = scan.nextInt();
                 if (answerDay1_31 == 1) {
                     loyalist -= 1; // -1
@@ -402,7 +405,6 @@ public class Main {
                     popularity -= 0;
                     money -= 0;
                     g += 1;
-                    witch_goods = 0;
                 } else if (answerDay1_31 == 2) {
                     loyalist += 0;
                     traitor += 0;
@@ -420,6 +422,7 @@ public class Main {
                     traitor += 0;
                     popularity += 1; // +1
                     money -= 0;
+                    event = 0;
                     g += 1;
                 } else if (answerDay1_31 == 4) {
                     loyalist += 0;
@@ -427,6 +430,7 @@ public class Main {
                     popularity += 1; // +1
                     money += 1; // +1
                     g += 1;
+                    event = 0;
                 } else {
                     continue;
                 }
@@ -449,6 +453,151 @@ public class Main {
         }
 
         game.gameChecker(); //승패 조건 체크
-//        day1_3();
-    }
-} // 마녀
+        day1_4();
+    } // 마녀
+    public void day1_4() {
+        Scanner scan = new Scanner(System.in);
+        Main game = new Main();
+
+        System.out.println("\n\n◈ Day1_16시 / 재정 : " + money + "\n"); game.loading();game.loading();
+
+        System.out.println("신하가 머리를 조아리며 아룁니다."); game.loading();
+        System.out.println("\"지하 감옥 확장공사 중 수상한 궤짝이 하나 발견되었습니다.");
+        System.out.println("이 궤짝을 어떻게 하시겠습니까? 고대의 물건처럼 보입니다.\""); game.loading();
+
+        System.out.println("1. 궤짝을 열어라");
+        System.out.println("2. 수상하다. 열지 말고 멀리 내다버려라");
+
+        int f = 0;
+        for (f = 0; f < 1;) {
+            int answerDay1_4 = scan.nextInt();
+            if (answerDay1_4 == 1) {
+                loyalist += 0;
+                traitor -= 0;
+                popularity -= 0;
+                money += 2; // +2
+                System.out.println("궤짝을 열자 막대한 양의 금덩어리가 나왔습니다.");
+                f += 1;
+            } else if (answerDay1_4 == 2) {
+                loyalist += 0;
+                traitor += 0;
+                popularity += 1; // +1
+                money -= 0;
+                f += 1;
+            } else {
+                continue;
+            }
+        }
+
+
+        System.out.println("check");
+        System.out.println(loyalist);
+        System.out.println(traitor);
+        System.out.println(popularity);
+        System.out.println(money);
+
+        for (int i=0; i<5;) {
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.print(".");
+            i++;
+        }
+
+        game.gameChecker(); //승패 조건 체크
+        day2_1();
+    } // 궤짝
+    public void day2_1() {
+        Scanner scan = new Scanner(System.in);
+        Main game = new Main();
+        Random randomMoney = new Random();
+
+        System.out.println("\n\n◈ Day2_09시 / 재정 : " + money + "\n"); game.loading();game.loading();
+
+        System.out.println("세금이 들어왔습니다"); game.loading();
+        System.out.println("1. 확인한다");
+        System.out.println("2. 확인하지 않는다");
+
+        int f = 0;
+        for (f = 0; f < 1;) {
+            int answerDay2_1 = scan.nextInt();
+            if (answerDay2_1 == 1) {
+                loyalist += 0;
+                traitor -= 0;
+                popularity -= 0;
+                int tax = randomMoney.nextInt(2)+1;
+                money += tax;
+                System.out.println("세금으로 재정이 ." + tax + "만큼 늘어났습니다.");
+            } else if (answerDay2_1 == 2) {
+                loyalist += 0;
+                traitor += 0;
+                popularity -= 0;
+                int tax = randomMoney.nextInt(2)+1;
+                money += randomMoney.nextInt(2)+1;;
+            } else {
+                continue;
+            }
+        }
+
+
+        System.out.println("check");
+        System.out.println(loyalist);
+        System.out.println(traitor);
+        System.out.println(popularity);
+        System.out.println(money);
+
+        for (int i=0; i<5;) {
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.print(".");
+            i++;
+        }
+
+        game.gameChecker(); //승패 조건 체크
+        day2_2();
+    } // 세금
+    public void day2_2() {
+        Scanner scan = new Scanner(System.in);
+        Main game = new Main();
+        Random randomMoney = new Random();
+
+        System.out.println("\n\n◈ Day2_10시 / 재정 : " + money + "\n"); game.loading(); game.loading();
+
+        if (event == 1) {
+            System.out.println("왕궁 전체에 신비하면서도 불길한 기운이 감돕니다."); game.loading();
+            System.out.println("그리고 왕궁 멀리서 다급한 병사의 외침이 들립니다.");
+            System.out.println("마녀가 사라졌다!");
+            System.out.println("이윽고 신비하면서도 불길한 기운이 사라졌습니다."); game.loading();
+            System.out.println("마녀가 말한 일들이 벌어진 것 같습니다.");
+            loyalist += 1;
+            popularity += 1;
+            money += 1;
+            String event1_over = scan.nextLine();
+        }
+
+
+        System.out.println("check");
+        System.out.println(loyalist);
+        System.out.println(traitor);
+        System.out.println(popularity);
+        System.out.println(money);
+
+        for (int i = 0; i < 5; ) {
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.print(".");
+            i++;
+        }
+
+        game.gameChecker(); //승패 조건 체크
+//        day2_3();
+    } // 사라진 마녀
+}
