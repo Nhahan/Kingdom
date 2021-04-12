@@ -92,7 +92,7 @@ public class Main {
         loyalist = 10;
         traitor = 5;
         popularity = 5;
-        money = 10;
+        money = 5;
     }
     public static void loading() {
         try {
@@ -243,12 +243,6 @@ public class Main {
             }
         }
 
-        System.out.println("check");
-        System.out.println(loyalist);
-        System.out.println(traitor);
-        System.out.println(popularity);
-        System.out.println(money);
-
         for (int i=0; i<5;) {
             try {
                 Thread.sleep(250);
@@ -310,12 +304,6 @@ public class Main {
                 continue;
             }
         }
-
-        System.out.println("check");
-        System.out.println(loyalist);
-        System.out.println(traitor);
-        System.out.println(popularity);
-        System.out.println(money);
 
         for (int i=0; i<5;) {
             try {
@@ -436,11 +424,6 @@ public class Main {
                 }
             }
         }
-        System.out.println("check");
-        System.out.println(loyalist);
-        System.out.println(traitor);
-        System.out.println(popularity);
-        System.out.println(money);
 
         for (int i = 0; i < 5; ) {
             try {
@@ -489,13 +472,6 @@ public class Main {
             }
         }
 
-
-        System.out.println("check");
-        System.out.println(loyalist);
-        System.out.println(traitor);
-        System.out.println(popularity);
-        System.out.println(money);
-
         for (int i=0; i<5;) {
             try {
                 Thread.sleep(250);
@@ -529,24 +505,19 @@ public class Main {
                 popularity -= 0;
                 int tax = randomMoney.nextInt(2)+1;
                 money += tax;
-                System.out.println("세금으로 재정이 ." + tax + "만큼 늘어났습니다.");
+                System.out.println("세금으로 재정이 " + tax + " 늘어났습니다.");
+                f += 1;
             } else if (answerDay2_1 == 2) {
                 loyalist += 0;
                 traitor += 0;
                 popularity -= 0;
                 int tax = randomMoney.nextInt(2)+1;
                 money += randomMoney.nextInt(2)+1;;
+                f += 1;
             } else {
                 continue;
             }
         }
-
-
-        System.out.println("check");
-        System.out.println(loyalist);
-        System.out.println(traitor);
-        System.out.println(popularity);
-        System.out.println(money);
 
         for (int i=0; i<5;) {
             try {
@@ -559,7 +530,12 @@ public class Main {
         }
 
         game.gameChecker(); //승패 조건 체크
-        day2_2();
+
+        if (event == 1) {
+            day2_2();
+        } else {
+            day2_3();
+        }
     } // 세금
     public void day2_2() {
         Scanner scan = new Scanner(System.in);
@@ -571,21 +547,14 @@ public class Main {
         if (event == 1) {
             System.out.println("왕궁 전체에 신비하면서도 불길한 기운이 감돕니다."); game.loading();
             System.out.println("그리고 왕궁 멀리서 다급한 병사의 외침이 들립니다.");
-            System.out.println("마녀가 사라졌다!");
+            System.out.println("\n마녀가 사라졌다!\n");
             System.out.println("이윽고 신비하면서도 불길한 기운이 사라졌습니다."); game.loading();
             System.out.println("마녀가 말한 일들이 벌어진 것 같습니다.");
             loyalist += 1;
             popularity += 1;
             money += 1;
-            String event1_over = scan.nextLine();
+            event = 0;
         }
-
-
-        System.out.println("check");
-        System.out.println(loyalist);
-        System.out.println(traitor);
-        System.out.println(popularity);
-        System.out.println(money);
 
         for (int i = 0; i < 5; ) {
             try {
@@ -598,6 +567,241 @@ public class Main {
         }
 
         game.gameChecker(); //승패 조건 체크
-//        day2_3();
+        day2_3();
     } // 사라진 마녀
+    public void day2_3() {
+        Scanner scan = new Scanner(System.in);
+        Main game = new Main();
+        Random randomMoney = new Random();
+
+        System.out.println("\n\n◈ Day2_11시 / 재정 : " + money + "\n"); game.loading(); game.loading();
+
+        System.out.println("신하가 머뭇거리며 이야기합니다."); game.loading();
+        System.out.println("\"지하 감옥 공사 중, 혼란한 틈을 타 죄수 1명이 탈출한 것으로 보입니다.");
+        System.out.println("어떻게 하는게 좋겠습니까?");
+        System.out.println("탈출한 죄수는 반역 죄인 크리스토퍼 입니다.\""); game.loading();
+
+        System.out.println("1. 얼른 뒤를 쫓아라");
+        System.out.println("2. 이런 멍청한. 내가 꼭 말을 해야 알겠느냐? 당장 쫓아가라!");
+        System.out.println("3. 내버려둬라");
+        System.out.println("4. 네 놈도 한패로구나. 이 놈을 끌어내라! (재산몰수)");
+
+        int f = 0;
+        for (f = 0; f < 1;) {
+            int answerDay2_3 = scan.nextInt();
+            if (answerDay2_3 == 1) {
+                loyalist += 1; // +1
+                traitor -= 0;
+                popularity -= 1; // -1
+                money -= 1; // -1
+                f += 1;
+                event = 2; // 탈출한 죄인 이벤트
+            } else if (answerDay2_3 == 2) {
+                loyalist += 0;
+                traitor += 0;
+                popularity -= 1; // -1
+                money -= 1; // -1
+                f += 1;
+                event = 2; // 탈출한 죄인 이벤트
+            } else if (answerDay2_3 == 3) {
+                loyalist -= -1;
+                traitor += 1;
+                popularity -= 1; // -1
+                money -= 0;
+                f += 1;
+            } else if (answerDay2_3 == 4) {
+                loyalist -= 2; // -2
+                traitor -= 0;
+                popularity += 0;
+                money += 1;
+                f += 1;
+            } else {
+                continue;
+            }
+        }
+
+        for (int i = 0; i < 5; ) {
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.print(".");
+            i++;
+        }
+
+        game.gameChecker(); //승패 조건 체크
+        day2_4();
+    } // 감옥 탈출
+    public void day2_4() {
+        Scanner scan = new Scanner(System.in);
+        Main game = new Main();
+        Random randomMoney = new Random();
+
+        System.out.println("\n\n◈ Day2_14시 / 재정 : " + money + "\n");
+        game.loading();
+        game.loading();
+
+        System.out.println("신하가 이야기합니다.");
+        game.loading();
+        System.out.println("\"왕이시여, 북부에 곧 겨울이 찾아옵니다.");
+        System.out.println("북부에 살고 있는 오랑캐들이 식량을 찾아 왕국을 약탈할 것입니다.");
+        System.out.println("군비를 늘려 이에 대한 방비를 철저히 해야합니다.\"");
+        game.loading();
+
+        System.out.println("1. 징병과 함께 병기를 정비하여 만반의 태세를 갖추어라");
+        System.out.println("2. 병기를 정비하라");
+        System.out.println("3. 이미 왕국은 안전하다. 소란피우지 말아라");
+        System.out.println("4. 네 이놈! 헛소문을 퍼뜨리는구나! 썩 물러가라");
+
+        int f = 0;
+        for (f = 0; f < 1; ) {
+            int answerDay2_3 = scan.nextInt();
+            if (answerDay2_3 == 1) {
+                loyalist += 2; // +2
+                traitor -= 0;
+                popularity -= 2; // -2
+                money -= 2; // -2
+                f += 1;
+            } else if (answerDay2_3 == 2) {
+                loyalist += 1; // +1
+                traitor += 0;
+                popularity -= 0;
+                money -= 1; // -1
+                f += 1;
+            } else if (answerDay2_3 == 3) {
+                loyalist -= 0;
+                traitor += 0;
+                popularity += 0;
+                money -= 0;
+                f += 1;
+            } else if (answerDay2_3 == 4) {
+                loyalist -= 1; // -1
+                traitor += 1; // +1
+                popularity += 0;
+                money -= 0;
+                f += 1;
+            } else {
+                continue;
+            }
+        }
+
+        for (int i = 0; i < 5; ) {
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.print(".");
+            i++;
+        }
+
+        game.gameChecker(); //승패 조건 체크
+        day2_5();
+    } // 북부의 겨울
+    public void day2_5() {
+        Scanner scan = new Scanner(System.in);
+        Main game = new Main();
+        Random randomMoney = new Random();
+
+        System.out.println("\n\n◈ Day2_16시 / 재정 : " + money + "\n");
+        game.loading();
+        game.loading();
+
+        System.out.println("당신은 머리가 아파 잠시 산책을 나왔습니다.");
+        game.loading();
+        System.out.println("그런데 산책길에 떨어져있는 찢어진 종이 하나가 눈에 들어옵니다.");
+
+        System.out.println("1. 종이를 읽는다");
+        System.out.println("2. 종이를 무시하고 그냥 가던 길을 간다");
+        System.out.println("3. 청소를 제대로 하지 않은 시녀들을 나무란다");
+        System.out.println("4. 청소를 제대로 하지 않은 시녀들을 사형한다");
+
+        int f = 0;
+        for (f = 0; f < 1; ) {
+            int answerDay2_5 = scan.nextInt();
+            if (answerDay2_5 == 1) {
+                System.out.println("현재의 왕은 무능하다");
+                System.out.println("......적인 귀족들은 처형당하고, 백성들의 ...... 민심은 흉흉하다");
+                System.out.println("......");
+                System.out.println("이제 새로운 왕을 ......");
+                System.out.println("반드시 ......\n");
+                game.loading();
+                System.out.println("당신은 두리번거렸지만 주변엔 아무도 없었습니다.");
+                game.loading();
+
+                System.out.println("머리를 식히려고 산책을 나왔건만 오히려 머리가 더 복잡해집니다.");
+                game.loading();
+                System.out.println("반역자가 있는 것은 확실하지만 누군지 알 수가 없습니다.");
+                System.out.println("쪽지를 쥔 손에 힘이 들어갑니다.");
+                System.out.println("1. 일단 화를 참는다");
+                System.out.println("2. 차오르는 화를 다스리기 위해 술파티를 연다");
+                System.out.println("3. 청소를 제대로 하지 않은 시녀들을 나무란다");
+                System.out.println("4. 청소를 제대로 하지 않은 시녀들을 사형한다");
+                for (f = 0; f < 1; ) {
+                    int answerDay2_51 = scan.nextInt();
+                    if (answerDay2_51 == 1) {
+                        loyalist += 0;
+                        traitor += 0;
+                        popularity -= 0;
+                        money -= 0;
+                        f += 1;
+                    } else if (answerDay2_51 == 2) {
+                        loyalist += 0;
+                        traitor -= 1; // -1
+                        popularity -= 0;
+                        money -= 1; // -1
+                        f += 1;
+                    } else if (answerDay2_51 == 3) {
+                        loyalist -= 0;
+                        traitor -= 0;
+                        popularity -= -1; // -1
+                        money -= 0;
+                        f += 1;
+                    } else if (answerDay2_51 == 4) {
+                        loyalist -= 1; // -1
+                        traitor += 1; // +1
+                        popularity -= -1; // -1
+                        money -= 0;
+                        f += 1;
+                    } else {
+                        continue;
+                    }
+                }
+            } else if (answerDay2_5 == 2) {
+                loyalist += 0;
+                traitor += 0;
+                popularity -= 0;
+                money -= 0;
+                f += 1;
+            } else if (answerDay2_5 == 3) {
+                loyalist -= 0;
+                traitor += 0;
+                popularity += 0;
+                money -= 0;
+                f += 1;
+            } else if (answerDay2_5 == 4) {
+                loyalist -= 1; // -1
+                traitor += 1; // +1
+                popularity += 0;
+                money -= 0;
+                f += 1;
+            } else {
+                continue;
+            }
+        }
+
+        for (int i = 0; i < 5; ) {
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.print(".");
+            i++;
+        }
+
+        game.gameChecker(); //승패 조건 체크
+//        day2_6();
+    } // 산책 중 종이 발견
 }
