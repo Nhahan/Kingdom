@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int loyalist = 10; //충신 수, 0이 되면 패배합니다
-    static int traitor = 5; //반역자 수, 반역자 수가 충신 수보다 많아지면 패배합니다.
-    static int popularity = 5; //민심, 0이 되면 패배합니다.
-    static int money = 5; //재정, 0이 되면 패배합니다.
-    static int merchant = 0;
-    static int event = 0;
+    static int loyalist; //충신 수, 0이 되면 패배합니다
+    static int traitor; //반역자 수, 반역자 수가 충신 수보다 많아지면 패배합니다.
+    static int popularity; //민심, 0이 되면 패배합니다.
+    static int money; //재정, 0이 되면 패배합니다.
+    static int merchant; // 상인이벤트변수
+    static int event; // 일반이벤트변수
 
     public static void main(String[] args) {
         Main game = new Main();
@@ -54,8 +54,6 @@ public class Main {
 
             String enter = scan.nextLine();
 
-            gameStatus(); //게임리셋
-
             game.gameStart(); //메인으로
         }
         else if (traitor > loyalist) {
@@ -63,8 +61,6 @@ public class Main {
             System.out.println("반역자들의 손에 왕국이 넘어갔습니다."); game.loading();
 
             String enter = scan.nextLine();
-
-            gameStatus();
 
             game.gameStart();
         }
@@ -74,8 +70,6 @@ public class Main {
 
             String enter = scan.nextLine();
 
-            gameStatus();
-
             game.gameStart();
         } else if (money <= 0) {
             System.out.println("왕국의 재정이 말랐습니다.");
@@ -83,17 +77,9 @@ public class Main {
 
             String enter = scan.nextLine();
 
-            gameStatus();
-
             game.gameStart();
         }
     } // 승패 체크
-    public void gameStatus() { // 게임 리셋
-        loyalist = 10;
-        traitor = 5;
-        popularity = 5;
-        money = 5;
-    }
     public static void loading() {
         try {
             Thread.sleep(1000);
@@ -104,6 +90,13 @@ public class Main {
     public void beforeDay1_1() {
         Scanner scan = new Scanner(System.in);
         Main game = new Main();
+
+        loyalist = 10; //게임리셋
+        traitor = 5;
+        popularity = 5;
+        money = 5;
+        merchant = 0;
+        event = 0;
 
         game.loading();
         System.out.println("\n당신은 어떤 왕인가요?"); game.loading();
