@@ -24,15 +24,7 @@ public class Main {
         System.out.println("\n\n시작하려면 Enter키를 눌러주세요.");
         String enter = scan.nextLine();
 
-        for (int i = 0; i < 5; ) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.print(".");
-            i++;
-        }
+        sleep250_5times();
 
         Main game = new Main();
 
@@ -128,15 +120,7 @@ public class Main {
         else {
             game.beforeDay1_1();
         }
-        for (int i=0; i<5;) {
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.print(".");
-            i++;
-        }
+        sleep250_5times();
         game.beforeDay1_2();
     } // 당신은 어떤 왕인가요?
     public void beforeDay1_2() {
@@ -174,7 +158,13 @@ public class Main {
             game.beforeDay1_2();
         }
 
-        for (int i=0; i<5;) {
+        sleep250_5times();
+
+        game.day1_1();
+    } // 당신은 전생에 어떤 사람이었습니까?
+
+    public void sleep250_5times() {
+        for (int i = 0; i < 5; ) {
             try {
                 Thread.sleep(250);
             } catch (InterruptedException ex) {
@@ -183,9 +173,8 @@ public class Main {
             System.out.print(".");
             i++;
         }
+    }
 
-        game.day1_1();
-    } // 당신은 전생에 어떤 사람이었습니까?
     public void day1_1() {
         Scanner scan = new Scanner(System.in);
         Main game = new Main();
@@ -236,15 +225,7 @@ public class Main {
             }
         }
 
-        for (int i=0; i<5;) {
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.print(".");
-            i++;
-        }
+        sleep250_5times();
 
         game.gameChecker(); //승패 조건 체크
         game.day1_2();
@@ -298,15 +279,7 @@ public class Main {
             }
         }
 
-        for (int i=0; i<5;) {
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.print(".");
-            i++;
-        }
+        sleep250_5times();
 
         game.gameChecker(); //승패 조건 체크
         day1_3();
@@ -418,15 +391,7 @@ public class Main {
             }
         }
 
-        for (int i = 0; i < 5; ) {
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.print(".");
-            i++;
-        }
+        sleep250_5times();
 
         game.gameChecker(); //승패 조건 체크
         day1_4();
@@ -465,15 +430,7 @@ public class Main {
             }
         }
 
-        for (int i=0; i<5;) {
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.print(".");
-            i++;
-        }
+        sleep250_5times();
 
         game.gameChecker(); //승패 조건 체크
         day2_1();
@@ -512,15 +469,7 @@ public class Main {
             }
         }
 
-        for (int i=0; i<5;) {
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.print(".");
-            i++;
-        }
+        sleep250_5times();
 
         game.gameChecker(); //승패 조건 체크
 
@@ -549,15 +498,7 @@ public class Main {
             event = 0;
         }
 
-        for (int i = 0; i < 5; ) {
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.print(".");
-            i++;
-        }
+        sleep250_5times();
 
         game.gameChecker(); //승패 조건 체크
         day2_3();
@@ -613,15 +554,7 @@ public class Main {
             }
         }
 
-        for (int i = 0; i < 5; ) {
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.print(".");
-            i++;
-        }
+        sleep250_5times();
 
         game.gameChecker(); //승패 조건 체크
         day2_4();
@@ -679,15 +612,7 @@ public class Main {
             }
         }
 
-        for (int i = 0; i < 5; ) {
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.print(".");
-            i++;
-        }
+        sleep250_5times();
 
         game.gameChecker(); //승패 조건 체크
         day2_5();
@@ -784,15 +709,7 @@ public class Main {
             }
         }
 
-        for (int i = 0; i < 5; ) {
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.print(".");
-            i++;
-        }
+        sleep250_5times();
 
         game.gameChecker(); //승패 조건 체크
 //        day2_6();
